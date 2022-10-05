@@ -14,6 +14,10 @@
 		060559E028DB6DE300CB1EA4 /* hangmanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060559DF28DB6DE300CB1EA4 /* hangmanTests.swift */; };
 		060559EA28DB6DE300CB1EA4 /* hangmanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060559E928DB6DE300CB1EA4 /* hangmanUITests.swift */; };
 		060559EC28DB6DE300CB1EA4 /* hangmanUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060559EB28DB6DE300CB1EA4 /* hangmanUITestsLaunchTests.swift */; };
+		060559F928DB6E1600CB1EA4 /* HangmanGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060559F828DB6E1600CB1EA4 /* HangmanGame.swift */; };
+		060559FA28DB6E1600CB1EA4 /* HangmanGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060559F828DB6E1600CB1EA4 /* HangmanGame.swift */; };
+		066BBBC828E853E800D017F3 /* TitlePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066BBBC728E853E800D017F3 /* TitlePage.swift */; };
+		066BBBCA28E8645700D017F3 /* GetWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066BBBC928E8645700D017F3 /* GetWord.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,9 @@
 		060559E528DB6DE300CB1EA4 /* hangmanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = hangmanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		060559E928DB6DE300CB1EA4 /* hangmanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hangmanUITests.swift; sourceTree = "<group>"; };
 		060559EB28DB6DE300CB1EA4 /* hangmanUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hangmanUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		060559F828DB6E1600CB1EA4 /* HangmanGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HangmanGame.swift; sourceTree = "<group>"; };
+		066BBBC728E853E800D017F3 /* TitlePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePage.swift; sourceTree = "<group>"; };
+		066BBBC928E8645700D017F3 /* GetWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWord.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +103,9 @@
 			children = (
 				060559CE28DB6DE200CB1EA4 /* hangmanApp.swift */,
 				060559D028DB6DE200CB1EA4 /* ContentView.swift */,
+				066BBBC728E853E800D017F3 /* TitlePage.swift */,
+				066BBBC928E8645700D017F3 /* GetWord.swift */,
+				060559F828DB6E1600CB1EA4 /* HangmanGame.swift */,
 				060559D228DB6DE300CB1EA4 /* Assets.xcassets */,
 				060559D428DB6DE300CB1EA4 /* Preview Content */,
 			);
@@ -258,7 +268,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				060559D128DB6DE200CB1EA4 /* ContentView.swift in Sources */,
+				066BBBC828E853E800D017F3 /* TitlePage.swift in Sources */,
+				060559F928DB6E1600CB1EA4 /* HangmanGame.swift in Sources */,
 				060559CF28DB6DE200CB1EA4 /* hangmanApp.swift in Sources */,
+				066BBBCA28E8645700D017F3 /* GetWord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +279,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				060559FA28DB6E1600CB1EA4 /* HangmanGame.swift in Sources */,
 				060559E028DB6DE300CB1EA4 /* hangmanTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

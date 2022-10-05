@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "word-list-raw.txt",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
