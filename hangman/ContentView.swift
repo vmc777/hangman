@@ -10,22 +10,32 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var myGame = try! HangmanGame(word: "letters")
 
-
     var body: some View {
+        
         VStack {
-            Text("Hangman")
-            Spacer()
-            HStack {
-                Text(myGame.displayableAnswer)
+            Group {
                 Spacer()
-                Text("\(myGame.guessesRemaining) guesses remaining")
-            }.padding()
+                Text("Hangman")
+                    .font(.largeTitle)
+                Spacer()
+            }
+
+            Text(myGame.displayableAnswer)
+                .font(.system(size: 40,weight: .heavy).monospaced())
+                .foregroundColor(.indigo)
+            Spacer()
+            Text("\(myGame.guessesRemaining) guesses remaining")
+  
             Spacer()
             AvailableLettersView(myGame: myGame)
             Spacer()
             Text(String(describing: myGame.status))
             Spacer()
         }
+        .frame(maxWidth: .infinity)
+        .background(Color(hue: 0.534, saturation: 1.0, brightness: 1.0, opacity: 0.17))
+        .ignoresSafeArea()
+
     }
 
     struct AvailableLettersView: View {
@@ -39,20 +49,25 @@ struct ContentView: View {
         ]
 
         var body: some View {
-            VStack {
+            VStack(spacing: 10) {
                 ForEach(rows, id: \.self) { row in
-                    HStack(spacing: 31.0) {
+                    HStack(spacing: 10) {
                         ForEach(row, id: \.self) { letter in
-                            Button(String(letter)) {
+                            Button {
                                 print(letter)
                                 try! myGame.guessLetter(letter)
+                            } label: {
+                                Image(systemName: "\(letter).square")
+                                    .font(.system(size: 35))
                             }
+                            .disabled(!myGame.availableLetters.contains(letter))
                         }
+                       
                     }
-                    .padding()
                 }
             }
-            .padding(30)
+            .padding()
+            .disabled(myGame.status != .playing)
         }
     }
 
