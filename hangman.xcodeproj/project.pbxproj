@@ -18,6 +18,7 @@
 		060559FA28DB6E1600CB1EA4 /* HangmanGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060559F828DB6E1600CB1EA4 /* HangmanGame.swift */; };
 		066BBBC828E853E800D017F3 /* TitlePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066BBBC728E853E800D017F3 /* TitlePage.swift */; };
 		066BBBCA28E8645700D017F3 /* GetWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066BBBC928E8645700D017F3 /* GetWord.swift */; };
+		06F6020828F1BF0100F35D56 /* Gallows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F6020728F1BF0100F35D56 /* Gallows.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		060559F828DB6E1600CB1EA4 /* HangmanGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HangmanGame.swift; sourceTree = "<group>"; };
 		066BBBC728E853E800D017F3 /* TitlePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePage.swift; sourceTree = "<group>"; };
 		066BBBC928E8645700D017F3 /* GetWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWord.swift; sourceTree = "<group>"; };
+		06F6020728F1BF0100F35D56 /* Gallows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallows.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				060559CE28DB6DE200CB1EA4 /* hangmanApp.swift */,
 				060559D028DB6DE200CB1EA4 /* ContentView.swift */,
+				06F6020728F1BF0100F35D56 /* Gallows.swift */,
 				066BBBC728E853E800D017F3 /* TitlePage.swift */,
 				066BBBC928E8645700D017F3 /* GetWord.swift */,
 				060559F828DB6E1600CB1EA4 /* HangmanGame.swift */,
@@ -272,6 +275,7 @@
 				060559F928DB6E1600CB1EA4 /* HangmanGame.swift in Sources */,
 				060559CF28DB6DE200CB1EA4 /* hangmanApp.swift in Sources */,
 				066BBBCA28E8645700D017F3 /* GetWord.swift in Sources */,
+				06F6020828F1BF0100F35D56 /* Gallows.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

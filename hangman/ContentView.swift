@@ -24,7 +24,18 @@ struct ContentView: View {
                 .font(.system(size: 40,weight: .heavy).monospaced())
                 .foregroundColor(.indigo)
             Spacer()
-            Text("\(myGame.guessesRemaining) guesses remaining")
+            HStack(spacing: 20) {
+                VStack{
+                    Text("\(myGame.guessesRemaining)")
+                    Text("guesses")
+                    Text("remaining")
+                }
+                
+                Gallows(guessesRemaining: myGame.guessesRemaining)
+                    .stroke(.red, lineWidth: 3)
+                    .frame(width: 80,height: 150)
+                    
+            }
   
             Spacer()
             AvailableLettersView(myGame: myGame)

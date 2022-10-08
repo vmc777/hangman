@@ -78,11 +78,6 @@ final class hangmanTests: XCTestCase {
         try myGame.guessLetter("f")
         try myGame.guessLetter("g")
         try myGame.guessLetter("h")
-        try myGame.guessLetter("j")
-        try myGame.guessLetter("k")
-        try myGame.guessLetter("l")
-        try myGame.guessLetter("m")
-        try myGame.guessLetter("p")
         XCTAssertEqual(myGame.status, .lost)
     }
     
@@ -165,11 +160,6 @@ final class hangmanTests: XCTestCase {
         try myGame.guessLetter("f")
         try myGame.guessLetter("m")
         try myGame.guessLetter("n")
-        try myGame.guessLetter("o")
-        try myGame.guessLetter("v")
-        try myGame.guessLetter("c")
-        try myGame.guessLetter("x")
-        try myGame.guessLetter("z")
         XCTAssertEqual(myGame.status, .lost)
         XCTAssertThrowsError(
             try myGame.guessLetter("t"),

@@ -23,7 +23,7 @@ enum HangmanGameStatus {
 
 class HangmanGame: ObservableObject {
    static let LETTER_COUNT = 7
-   static let INCORRECT_GUESSES_ALLOWED = 11
+   static let INCORRECT_GUESSES_ALLOWED = 6
 
     let word: String
     private(set) var availableLetters: [Character] = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
