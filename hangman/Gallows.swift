@@ -33,11 +33,14 @@ struct Gallows: Shape {
             
         addGallows()
         addHead()
-        addTorso()
-        addArms()
-        addLegs()
-        addEyes()
         addMouth()
+        addEyes()
+        addTorso()
+        addArms(armLength: height * 0.15,
+                leftArmAngle: deg2rad(50),
+                rightArmAngle: deg2rad(30))
+        addLegs()
+
         return path
         
         func addGallows() {
@@ -82,25 +85,33 @@ struct Gallows: Shape {
             path.addLine(to: bottomOfTorso)
         }
         
-        func addArms() {
+        func addArms(armLength: Double, leftArmAngle: Double, rightArmAngle: Double) {
             if guessesRemaining >= guessesCutoff { return }
             guessesCutoff -= 1
-            
-            let armLength = height * 0.15
-            let armAngle = deg2rad(50)
             
             let shoulders = CGPoint(
                 x: bottomOfHead.x,
                 y: bottomOfHead.y + headRadius / 2)
-            let handXDelta = cos(armAngle) * armLength
-            let handY = shoulders.y + (sin(armAngle) * armLength)
-            let leftHandX = shoulders.x - handXDelta
-            let rightHandX = shoulders.x + handXDelta
             
-            path.move(to: shoulders)
-            path.addLine(to: CGPoint(x: leftHandX, y: handY))
-            path.move(to: shoulders)
-            path.addLine(to: CGPoint(x: rightHandX, y: handY))
+            let leftArmPath = Path { armPath in
+                armPath.move(to: CGPoint(x: 0, y: 0))
+                armPath.addLine(to: CGPoint(x: armLength, y: 0))
+            }
+            let rightArmPath = Path { armPath in
+                armPath.move(to: CGPoint(x: 0, y: 0))
+                armPath.addLine(to: CGPoint(x: -armLength, y: 0))
+            }
+            
+            let leftRotation = CGAffineTransform(rotationAngle: leftArmAngle)
+            let righRotation = CGAffineTransform(rotationAngle: -rightArmAngle)
+            let translation = CGAffineTransform(translationX: shoulders.x, y: shoulders.y)
+            
+            let leftArmTransform = leftRotation.concatenating(translation)
+            let rightArmTransform = righRotation.concatenating(translation)
+
+            path.addPath(leftArmPath,transform: leftArmTransform)
+            path.addPath(rightArmPath,transform: rightArmTransform)
+
         }
         
         func addLegs() {
@@ -155,7 +166,6 @@ struct Gallows: Shape {
             guessesCutoff -= 1
             
             let mouthRadius = headRadius * 0.2
-      
             let mouthCenter = CGPoint(x: bottomOfHead.x, y: bottomOfHead.y - mouthRadius * 2)
             
             path.move(to: CGPoint(x: bottomOfHead.x + mouthRadius, y: mouthCenter.y))
