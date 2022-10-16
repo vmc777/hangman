@@ -33,14 +33,14 @@ struct Gallows: Shape {
             
         addGallows()
         addHead()
-        addMouth()
-        addEyes()
         addTorso()
         addArms(armLength: height * 0.15,
                 leftArmAngle: deg2rad(50),
                 rightArmAngle: deg2rad(30))
         addLegs()
-
+        addEyes()
+        addMouth()
+     
         return path
         
         func addGallows() {
@@ -62,7 +62,8 @@ struct Gallows: Shape {
         }
         
         func addHead() {
-            if guessesRemaining >= guessesCutoff { return }
+            guard guessesCutoff > guessesRemaining else { return }
+//            if guessesRemaining >= guessesCutoff { return }
             guessesCutoff -= 1
             
             path.move(to: endOfRope)
@@ -73,8 +74,7 @@ struct Gallows: Shape {
                 radius: headRadius,
                 startAngle: .degrees(270),
                 endAngle: .degrees(270 - 360),
-                clockwise: false
-            )
+                clockwise: false)
         }
         
         func addTorso() {
@@ -109,9 +109,8 @@ struct Gallows: Shape {
             let leftArmTransform = leftRotation.concatenating(translation)
             let rightArmTransform = righRotation.concatenating(translation)
 
-            path.addPath(leftArmPath,transform: leftArmTransform)
-            path.addPath(rightArmPath,transform: rightArmTransform)
-
+            path.addPath(leftArmPath, transform: leftArmTransform)
+            path.addPath(rightArmPath, transform: rightArmTransform)
         }
         
         func addLegs() {
@@ -149,16 +148,14 @@ struct Gallows: Shape {
                 radius: eyeRadius,
                 startAngle: .degrees(270),
                 endAngle: .degrees(270 - 360),
-                clockwise: false
-            )
+                clockwise: false)
             path.move(to: CGPoint(x: leftEyeX, y: eyeY - eyeRadius))
             path.addArc(
                 center: CGPoint(x: leftEyeX, y: eyeY),
                 radius: eyeRadius,
                 startAngle: .degrees(270),
                 endAngle: .degrees(270 - 360),
-                clockwise: false
-            )
+                clockwise: false)
         }
         
         func addMouth() {
