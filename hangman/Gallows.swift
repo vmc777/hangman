@@ -12,7 +12,7 @@ struct Gallows: Shape {
      
     func path(in rect: CGRect) -> Path {
         var path = Path()
-        var guessesCutoff = HangmanGame.INCORRECT_GUESSES_ALLOWED
+        var partsRemainingToDraw = HangmanGame.INCORRECT_GUESSES_ALLOWED - guessesRemaining
         
         let height = rect.height
         let width = rect.width
@@ -62,9 +62,7 @@ struct Gallows: Shape {
         }
         
         func addHead() {
-            guard guessesCutoff > guessesRemaining else { return }
-//            if guessesRemaining >= guessesCutoff { return }
-            guessesCutoff -= 1
+            guard partsRemainingToDraw > 0 else { return }
             
             path.move(to: endOfRope)
             path.addArc(
@@ -75,20 +73,22 @@ struct Gallows: Shape {
                 startAngle: .degrees(270),
                 endAngle: .degrees(270 - 360),
                 clockwise: false)
+
+            partsRemainingToDraw -= 1
         }
         
         func addTorso() {
-            if guessesRemaining >= guessesCutoff { return }
-            guessesCutoff -= 1
+            guard partsRemainingToDraw > 0 else { return }
             
             path.move(to: bottomOfHead)
             path.addLine(to: bottomOfTorso)
+
+            partsRemainingToDraw -= 1
         }
         
         func addArms(armLength: Double, leftArmAngle: Double, rightArmAngle: Double) {
-            if guessesRemaining >= guessesCutoff { return }
-            guessesCutoff -= 1
-            
+            guard partsRemainingToDraw > 0 else { return }
+
             let shoulders = CGPoint(
                 x: bottomOfHead.x,
                 y: bottomOfHead.y + headRadius / 2)
@@ -111,11 +111,12 @@ struct Gallows: Shape {
 
             path.addPath(leftArmPath, transform: leftArmTransform)
             path.addPath(rightArmPath, transform: rightArmTransform)
+
+            partsRemainingToDraw -= 1
         }
         
         func addLegs() {
-            if guessesRemaining >= guessesCutoff { return }
-            guessesCutoff -= 1
+            guard partsRemainingToDraw > 0 else { return }
             
             let legLength = height * 0.30
             let legAngle = deg2rad(70)
@@ -129,12 +130,13 @@ struct Gallows: Shape {
             path.addLine(to: CGPoint(x: leftFootX, y: footY))
             path.move(to: bottomOfTorso)
             path.addLine(to: CGPoint(x: rightFootX, y: footY))
+
+            partsRemainingToDraw -= 1
         }
         
         func addEyes() {
-            if guessesRemaining >= guessesCutoff { return }
-            guessesCutoff -= 1
-  
+            guard partsRemainingToDraw > 0 else { return }
+
             let eyeXDelta = headRadius * 0.3
             let eyeY = endOfRope.y + headRadius * 0.8
             let eyeRadius = headRadius * 0.1
@@ -156,11 +158,12 @@ struct Gallows: Shape {
                 startAngle: .degrees(270),
                 endAngle: .degrees(270 - 360),
                 clockwise: false)
+
+            partsRemainingToDraw -= 1
         }
         
         func addMouth() {
-            if guessesRemaining >= guessesCutoff { return }
-            guessesCutoff -= 1
+            guard partsRemainingToDraw > 0 else { return }
             
             let mouthRadius = headRadius * 0.2
             let mouthCenter = CGPoint(x: bottomOfHead.x, y: bottomOfHead.y - mouthRadius * 2)
@@ -171,6 +174,8 @@ struct Gallows: Shape {
                         startAngle: .degrees(0),
                         endAngle: .degrees(180),
                         clockwise: true)
+
+            partsRemainingToDraw -= 1
         }
     }
 
@@ -183,7 +188,7 @@ struct Gallows_Preview: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            Gallows(guessesRemaining: 0)
+            Gallows(guessesRemaining: 3)
                 .stroke(.red, lineWidth: 3)
                 .frame(width: 300.0, height: 400.0)
                 .background(.yellow)

@@ -43,6 +43,9 @@ class HangmanViewModel: ObservableObject {
     }
     
     func startNewGame() {
-        // TODO:
+        // TODO: Unit Test (??)
+        let words = ["letters", "rainbow", "charlie"]
+        game = try! HangmanGame(word: words.randomElement()!)
+        availableLetters = game.availableLetters
     }
 }

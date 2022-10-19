@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HangmanView: View {
     @StateObject var viewModel = HangmanViewModel()
+    @State private var showingAlert = false
 
     var body: some View {
         VStack {
@@ -36,18 +37,27 @@ struct HangmanView: View {
             }
 
             Spacer()
-            AvailableLettersView(viewModel: viewModel)
+            AvailableLettersView(viewModel: viewModel) {
+                showingAlert = $0
+            }
             Spacer()
             Text(String(describing: viewModel.status))
             Spacer()
         }
         .frame(maxWidth: .infinity)
         .background(Color(hue: 0.534, saturation: 1.0, brightness: 1.0, opacity: 0.17))
+        .alert(viewModel.status == .lost ? "You Lost" : "You Won!!",
+               isPresented: $showingAlert) {
+            Button("OK", role: .cancel) {
+                viewModel.startNewGame()
+            }
+        }
         .ignoresSafeArea()
     }
 
     struct AvailableLettersView: View {
         @ObservedObject var viewModel: HangmanViewModel
+        let updateShowingAlert: (Bool) -> Void
 
         let rows: [[Character]] = [
             ["a", "b", "c", "d", "e", "f", "g"],
@@ -64,6 +74,7 @@ struct HangmanView: View {
                             Button {
                                 print(letter)
                                 viewModel.guessLetter(letter)
+                                updateShowingAlert(viewModel.status != .playing)
                             } label: {
                                 Image(systemName: "\(letter).square")
                                     .font(.system(size: 35))
@@ -84,4 +95,3 @@ struct HangmanView: View {
         }
     }
 }
-
