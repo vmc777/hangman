@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    @StateObject var myGame = try! HangmanGame(word: "letters")
+struct HangmanView: View {
+    @StateObject var viewModel = HangmanViewModel()
 
     var body: some View {
-        
         VStack {
             Group {
                 Spacer()
@@ -20,37 +19,35 @@ struct ContentView: View {
                 Spacer()
             }
 
-            Text(myGame.displayableAnswer)
-                .font(.system(size: 40,weight: .heavy).monospaced())
+            Text(viewModel.displayableAnswer)
+                .font(.system(size: 40, weight: .heavy).monospaced())
                 .foregroundColor(.indigo)
             Spacer()
             HStack(spacing: 20) {
-                VStack{
-                    Text("\(myGame.guessesRemaining)")
+                VStack {
+                    Text("\(viewModel.guessesRemaining)")
                     Text("guesses")
                     Text("remaining")
                 }
-                
-                Gallows(guessesRemaining: myGame.guessesRemaining)
+
+                Gallows(guessesRemaining: viewModel.guessesRemaining)
                     .stroke(.red, lineWidth: 3)
-                    .frame(width: 80,height: 150)
-                    
+                    .frame(width: 80, height: 150)
             }
-  
+
             Spacer()
-            AvailableLettersView(myGame: myGame)
+            AvailableLettersView(viewModel: viewModel)
             Spacer()
-            Text(String(describing: myGame.status))
+            Text(String(describing: viewModel.status))
             Spacer()
         }
         .frame(maxWidth: .infinity)
         .background(Color(hue: 0.534, saturation: 1.0, brightness: 1.0, opacity: 0.17))
         .ignoresSafeArea()
-
     }
 
     struct AvailableLettersView: View {
-        @ObservedObject var myGame: HangmanGame
+        @ObservedObject var viewModel: HangmanViewModel
 
         let rows: [[Character]] = [
             ["a", "b", "c", "d", "e", "f", "g"],
@@ -66,31 +63,25 @@ struct ContentView: View {
                         ForEach(row, id: \.self) { letter in
                             Button {
                                 print(letter)
-                                try! myGame.guessLetter(letter)
+                                viewModel.guessLetter(letter)
                             } label: {
                                 Image(systemName: "\(letter).square")
                                     .font(.system(size: 35))
                             }
-                            .disabled(!myGame.availableLetters.contains(letter))
+                            .disabled(!viewModel.availableLetters.contains(letter))
                         }
-                       
                     }
                 }
             }
             .padding()
-            .disabled(myGame.status != .playing)
+            .disabled(viewModel.status != .playing)
         }
     }
 
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
-            ContentView()
+            HangmanView()
         }
     }
 }
 
-//            .frame(maxWidth: .infinty, maxHeight: .infinity)
-//            Text ("how many games you've won")
-//            Text("letters available", \(myGame.usedLetters.debugDescription))
-//        }
-//        .padding()

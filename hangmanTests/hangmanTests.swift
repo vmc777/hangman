@@ -50,11 +50,10 @@ final class hangmanTests: XCTestCase {
     func testInitialGuesses() throws {
         let myGame = try HangmanGame(word: defaultWord)
         XCTAssertEqual(myGame.incorrectGuessCount, 0)
-        XCTAssertEqual(myGame.guessesRemaining, HangmanGame.INCORRECT_GUESSES_ALLOWED)
     }
     
     func testgueesesRemaingAfter3Wrong() throws {
-        let myGame = try HangmanGame(word: defaultWord)
+        var myGame = try HangmanGame(word: defaultWord)
         try myGame.guessLetter("c")
         try myGame.guessLetter("d")
         try myGame.guessLetter("a")
@@ -65,13 +64,12 @@ final class hangmanTests: XCTestCase {
 
         XCTAssertEqual(myGame.availableLetters, expectedAvailableLetters)
         XCTAssertEqual(myGame.incorrectGuessCount, 3)
-        XCTAssertEqual(myGame.guessesRemaining, HangmanGame.INCORRECT_GUESSES_ALLOWED - 3)
         XCTAssertEqual(myGame.answer, expectedAnswer)
         XCTAssertEqual(myGame.status, .playing)
     }
 
     func testLosingGame() throws {
-        let myGame = try HangmanGame(word: defaultWord)
+        var myGame = try HangmanGame(word: defaultWord)
         try myGame.guessLetter("c")
         try myGame.guessLetter("d")
         try myGame.guessLetter("e")
@@ -82,7 +80,7 @@ final class hangmanTests: XCTestCase {
     }
     
     func testWinningGame() throws {
-        let myGame = try HangmanGame(word: defaultWord)
+        var myGame = try HangmanGame(word: defaultWord)
         try myGame.guessLetter("r")
         try myGame.guessLetter("a")
         try myGame.guessLetter("i")
@@ -104,41 +102,16 @@ final class hangmanTests: XCTestCase {
         XCTAssertEqual(myGame.answer, expectedAnswer)
     }
 
-    func testDisplayableAnswer() throws {
-        let myGame = try HangmanGame(word: defaultWord)
-        XCTAssertEqual(myGame.displayableAnswer, "_ _ _ _ _ _ _")
-        
-        try myGame.guessLetter("n")
-        XCTAssertEqual(myGame.displayableAnswer, "_ _ _ n _ _ _")
-        
-        try myGame.guessLetter("r")
-        XCTAssertEqual(myGame.displayableAnswer, "r _ _ n _ _ _")
-        
-        try myGame.guessLetter("w")
-        XCTAssertEqual(myGame.displayableAnswer, "r _ _ n _ _ w")
-        
-        try myGame.guessLetter("o")
-        XCTAssertEqual(myGame.displayableAnswer, "r _ _ n _ o w")
-        
-        try myGame.guessLetter("b")
-        XCTAssertEqual(myGame.displayableAnswer, "r _ _ n b o w")
-        
-        try myGame.guessLetter("i")
-        XCTAssertEqual(myGame.displayableAnswer, "r _ i n b o w")
-        
-        try myGame.guessLetter("a")
-        XCTAssertEqual(myGame.displayableAnswer, "r a i n b o w")
-    }
     
     func testWordWithRepeatingLetters() throws {
-        let myGame = try HangmanGame(word: "letters")
+        var myGame = try HangmanGame(word: "letters")
          
         try myGame.guessLetter("t")
-        XCTAssertEqual(myGame.displayableAnswer, "_ _ t t _ _ _")
+        XCTAssertEqual(myGame.answer,[nil,nil,"t","t",nil,nil,nil] )
     }
     
     func testCantGuessAfterWinning() throws {
-        let myGame = try HangmanGame(word: "letters")
+        var myGame = try HangmanGame(word: "letters")
         try myGame.guessLetter("l")
         try myGame.guessLetter("e")
         try myGame.guessLetter("t")
@@ -153,7 +126,7 @@ final class hangmanTests: XCTestCase {
     }
     
     func testCantGuessAfterLosing() throws {
-        let myGame = try HangmanGame(word: "letters")
+        var myGame = try HangmanGame(word: "letters")
         try myGame.guessLetter("a")
         try myGame.guessLetter("b")
         try myGame.guessLetter("h")
@@ -169,7 +142,7 @@ final class hangmanTests: XCTestCase {
     }
     
     func testInvalidLetter() throws {
-        let myGame = try HangmanGame(word: "letters")
+        var myGame = try HangmanGame(word: "letters")
         try myGame.guessLetter("a")
         XCTAssertThrowsError(
             try myGame.guessLetter("a"),

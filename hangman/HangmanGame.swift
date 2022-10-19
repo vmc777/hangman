@@ -21,7 +21,7 @@ enum HangmanGameStatus {
 }
 
 
-class HangmanGame: ObservableObject {
+struct HangmanGame {
    static let LETTER_COUNT = 7
    static let INCORRECT_GUESSES_ALLOWED = 6
 
@@ -33,14 +33,11 @@ class HangmanGame: ObservableObject {
         word.map { availableLetters.contains($0) ? nil : $0 }
     }
 
-    @Published var displayableAnswer: String = "_ _ _ _ _ _ _"
-    @Published var guessesRemaining: Int = INCORRECT_GUESSES_ALLOWED
-
     var status: HangmanGameStatus {
         if answer.allSatisfy({ $0 != nil }) {
             return .won
         }
-        if guessesRemaining <= 0 {
+        if incorrectGuessCount >= HangmanGame.INCORRECT_GUESSES_ALLOWED {
             return .lost
         }
         return .playing
@@ -53,7 +50,7 @@ class HangmanGame: ObservableObject {
         self.word = word
     }
 
-    func guessLetter(_ letter: Character) throws {
+    mutating func guessLetter(_ letter: Character) throws {
         if status != .playing {
             throw HangmanError.notInPlayingStatus
         }
@@ -65,15 +62,6 @@ class HangmanGame: ObservableObject {
         if !word.contains(letter) {
             incorrectGuessCount += 1
         }
-        updateGuessesRemaining()
-        updateDisplayableAnswer()
     }
 
-    private func updateGuessesRemaining() {
-        guessesRemaining = HangmanGame.INCORRECT_GUESSES_ALLOWED - incorrectGuessCount
-    }
-
-    private func updateDisplayableAnswer() {
-        displayableAnswer = "\(answer[0] ?? "_") \(answer[1] ?? "_") \(answer[2] ?? "_") \(answer[3] ?? "_") \(answer[4] ?? "_") \(answer[5] ?? "_") \(answer[6] ?? "_")"
-    }
 }
