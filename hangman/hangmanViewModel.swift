@@ -9,16 +9,11 @@ import Foundation
 
 class HangmanViewModel: ObservableObject {
     private var game: HangmanGame
-    private let hangManWords: HangmanWords
+    private let hangManWords: HangmanWords = HangmanWords()
     
     @Published private(set) var availableLetters: [Character]
     
-    convenience init() {
-        self.init(word: nil)
-    }
-    
-    required init(word: String?) {
-        hangManWords = HangmanWords()
+    init(word: String? = nil) {
         game = try! HangmanGame(word: word ?? hangManWords.randomWord())
         availableLetters = game.availableLetters
     }

@@ -27,8 +27,13 @@ struct HangmanView: View {
             HStack(spacing: 20) {
                 VStack {
                     Text("\(viewModel.guessesRemaining)")
+                    Text("incorrect")
                     Text("guesses")
-                    Text("remaining")
+                    if viewModel.guessesRemaining == HangmanGame.INCORRECT_GUESSES_ALLOWED {
+                        Text("allowed")
+                    } else {
+                        Text("remaining")
+                    }
                 }
 
                 Gallows(guessesRemaining: viewModel.guessesRemaining)
@@ -41,7 +46,7 @@ struct HangmanView: View {
                 showingAlert = $0
             }
             Spacer()
-            Text(String(describing: viewModel.status))
+
             Spacer()
         }
         .frame(maxWidth: .infinity)
@@ -49,7 +54,7 @@ struct HangmanView: View {
         .alert(isPresented: $showingAlert) {
             Alert(
                 title: Text(viewModel.status == .lost ? "You Lost" : "You Won!!"),
-                message: Text(viewModel.status == .lost ? "The word was \"\(viewModel.word)\"" : ""),
+                message: Text(viewModel.status == .lost ? "The word was \"\(viewModel.word)\"." : ""),
                 dismissButton: .cancel(Text("OK")) {
                     viewModel.startNewGame()
                 })
