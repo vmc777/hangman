@@ -150,4 +150,10 @@ final class hangmanTests: XCTestCase {
                 XCTAssertEqual(err as? HangmanError, HangmanError.invalidLetter)
             }
     }
+    
+    func testWordWithCapitalLetter() throws {
+        var myGame = try HangmanGame(word: "ffffFff")
+        let expectedAnswer: [Character?] = [nil, nil, nil, nil, nil, nil, nil]
+        XCTAssertEqual(myGame.answer, expectedAnswer)
+    }
 }

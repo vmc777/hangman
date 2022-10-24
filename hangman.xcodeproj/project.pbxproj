@@ -16,9 +16,11 @@
 		060559EC28DB6DE300CB1EA4 /* hangmanUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060559EB28DB6DE300CB1EA4 /* hangmanUITestsLaunchTests.swift */; };
 		060559F928DB6E1600CB1EA4 /* HangmanGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060559F828DB6E1600CB1EA4 /* HangmanGame.swift */; };
 		060559FA28DB6E1600CB1EA4 /* HangmanGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060559F828DB6E1600CB1EA4 /* HangmanGame.swift */; };
+		060E1411290095F90075024A /* HangmanWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060E1410290095F90075024A /* HangmanWords.swift */; };
 		066BBBCA28E8645700D017F3 /* GetWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066BBBC928E8645700D017F3 /* GetWord.swift */; };
 		06BD61062900319000C2E559 /* hangmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BD61052900319000C2E559 /* hangmanViewModel.swift */; };
 		06BD610829003B5600C2E559 /* HangmanViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BD610729003B5600C2E559 /* HangmanViewModelTests.swift */; };
+		06F521032905D83F002B3008 /* common-7-letter-words.txt in Resources */ = {isa = PBXBuildFile; fileRef = 06F521022905D83F002B3008 /* common-7-letter-words.txt */; };
 		06F6020828F1BF0100F35D56 /* Gallows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F6020728F1BF0100F35D56 /* Gallows.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,9 +53,11 @@
 		060559E928DB6DE300CB1EA4 /* hangmanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hangmanUITests.swift; sourceTree = "<group>"; };
 		060559EB28DB6DE300CB1EA4 /* hangmanUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hangmanUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		060559F828DB6E1600CB1EA4 /* HangmanGame.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HangmanGame.swift; sourceTree = "<group>"; };
+		060E1410290095F90075024A /* HangmanWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanWords.swift; sourceTree = "<group>"; };
 		066BBBC928E8645700D017F3 /* GetWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWord.swift; sourceTree = "<group>"; };
 		06BD61052900319000C2E559 /* hangmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hangmanViewModel.swift; sourceTree = "<group>"; };
 		06BD610729003B5600C2E559 /* HangmanViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanViewModelTests.swift; sourceTree = "<group>"; };
+		06F521022905D83F002B3008 /* common-7-letter-words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "common-7-letter-words.txt"; sourceTree = "<group>"; };
 		06F6020728F1BF0100F35D56 /* Gallows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallows.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -108,7 +112,9 @@
 				060559CE28DB6DE200CB1EA4 /* hangmanApp.swift */,
 				060559D028DB6DE200CB1EA4 /* HangmanView.swift */,
 				06F6020728F1BF0100F35D56 /* Gallows.swift */,
+				06F521022905D83F002B3008 /* common-7-letter-words.txt */,
 				066BBBC928E8645700D017F3 /* GetWord.swift */,
+				060E1410290095F90075024A /* HangmanWords.swift */,
 				06BD61052900319000C2E559 /* hangmanViewModel.swift */,
 				060559F828DB6E1600CB1EA4 /* HangmanGame.swift */,
 				060559D228DB6DE300CB1EA4 /* Assets.xcassets */,
@@ -249,6 +255,7 @@
 			files = (
 				060559D628DB6DE300CB1EA4 /* Preview Assets.xcassets in Resources */,
 				060559D328DB6DE300CB1EA4 /* Assets.xcassets in Resources */,
+				06F521032905D83F002B3008 /* common-7-letter-words.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				060E1411290095F90075024A /* HangmanWords.swift in Sources */,
 				060559D128DB6DE200CB1EA4 /* HangmanView.swift in Sources */,
 				060559F928DB6E1600CB1EA4 /* HangmanGame.swift in Sources */,
 				060559CF28DB6DE200CB1EA4 /* hangmanApp.swift in Sources */,

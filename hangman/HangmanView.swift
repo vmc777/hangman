@@ -46,11 +46,13 @@ struct HangmanView: View {
         }
         .frame(maxWidth: .infinity)
         .background(Color(hue: 0.534, saturation: 1.0, brightness: 1.0, opacity: 0.17))
-        .alert(viewModel.status == .lost ? "You Lost" : "You Won!!",
-               isPresented: $showingAlert) {
-            Button("OK", role: .cancel) {
-                viewModel.startNewGame()
-            }
+        .alert(isPresented: $showingAlert) {
+            Alert(
+                title: Text(viewModel.status == .lost ? "You Lost" : "You Won!!"),
+                message: Text(viewModel.status == .lost ? "The word was \"\(viewModel.word)\"" : ""),
+                dismissButton: .cancel(Text("OK")) {
+                    viewModel.startNewGame()
+                })
         }
         .ignoresSafeArea()
     }
@@ -72,7 +74,6 @@ struct HangmanView: View {
                     HStack(spacing: 10) {
                         ForEach(row, id: \.self) { letter in
                             Button {
-                                print(letter)
                                 viewModel.guessLetter(letter)
                                 updateShowingAlert(viewModel.status != .playing)
                             } label: {

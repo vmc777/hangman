@@ -30,7 +30,7 @@ struct HangmanGame {
 
     private(set) var incorrectGuessCount = 0
     var answer: [Character?] {
-        word.map { availableLetters.contains($0) ? nil : $0 }
+        word.map { availableLetters.contains($0.lowercased()) ? nil : $0 }
     }
 
     var status: HangmanGameStatus {

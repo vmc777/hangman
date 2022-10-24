@@ -9,18 +9,17 @@ import Foundation
 
 class HangmanViewModel: ObservableObject {
     private var game: HangmanGame
+    private let hangManWords: HangmanWords
     
     @Published private(set) var availableLetters: [Character]
     
     convenience init() {
-        // stub
-        let words = ["letters", "rainbow", "charlie"]
-        // -- stub
-        self.init(word: words.randomElement()!)
+        self.init(word: nil)
     }
     
-    required init(word: String) {
-        game = try! HangmanGame(word: word)
+    required init(word: String?) {
+        hangManWords = HangmanWords()
+        game = try! HangmanGame(word: word ?? hangManWords.randomWord())
         availableLetters = game.availableLetters
     }
     
@@ -31,6 +30,10 @@ class HangmanViewModel: ObservableObject {
     
     var guessesRemaining: Int {
         HangmanGame.INCORRECT_GUESSES_ALLOWED - game.incorrectGuessCount
+    }
+
+    var word: String {
+        game.word
     }
     
     var status: HangmanGameStatus {
@@ -44,8 +47,7 @@ class HangmanViewModel: ObservableObject {
     
     func startNewGame() {
         // TODO: Unit Test (??)
-        let words = ["letters", "rainbow", "charlie"]
-        game = try! HangmanGame(word: words.randomElement()!)
+        game = try! HangmanGame(word: hangManWords.randomWord())
         availableLetters = game.availableLetters
     }
 }
