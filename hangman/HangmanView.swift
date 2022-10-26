@@ -1,6 +1,6 @@
 //
-//  ContentView.swift
-//  hangman
+//  HangmanView.swift (ContentView.swift)
+//  hangman (app name)
 //
 //  Created by VerDel Cargal on 9/21/22.
 //
