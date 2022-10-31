@@ -9,62 +9,66 @@ import SwiftUI
 
 struct HangmanView: View {
     @StateObject var viewModel = HangmanViewModel()
-    @State private var showingAlert = false
 
     var body: some View {
-        VStack {
-            Group {
-                Spacer()
-                Text("Hangman")
-                    .font(.largeTitle)
-                Spacer()
+        ZStack {
+            GameView(viewModel: viewModel)
+            if viewModel.status == .won {
+                WonView(viewModel: viewModel)
             }
-
-            Text(viewModel.displayableAnswer)
-                .font(.system(size: 40, weight: .heavy).monospaced())
-                .foregroundColor(.indigo)
-            Spacer()
-            HStack(spacing: 20) {
-                VStack {
-                    Text("\(viewModel.guessesRemaining)")
-                    Text("incorrect")
-                    Text("guesses")
-                    if viewModel.guessesRemaining == HangmanGame.INCORRECT_GUESSES_ALLOWED {
-                        Text("allowed")
-                    } else {
-                        Text("remaining")
-                    }
-                }
-
-                Gallows(guessesRemaining: viewModel.guessesRemaining)
-                    .stroke(.red, lineWidth: 3)
-                    .frame(width: 80, height: 150)
+            if viewModel.status == .lost {
+                LostView(viewModel: viewModel)
             }
-
-            Spacer()
-            AvailableLettersView(viewModel: viewModel) {
-                showingAlert = $0
-            }
-            Spacer()
-
-            Spacer()
         }
         .frame(maxWidth: .infinity)
         .background(Color(hue: 0.534, saturation: 1.0, brightness: 1.0, opacity: 0.17))
-        .alert(isPresented: $showingAlert) {
-            Alert(
-                title: Text(viewModel.status == .lost ? "You Lost" : "You Won!!"),
-                message: Text(viewModel.status == .lost ? "The word was \"\(viewModel.word)\"." : ""),
-                dismissButton: .cancel(Text("OK")) {
-                    viewModel.startNewGame()
-                })
-        }
         .ignoresSafeArea()
+    }
+
+    struct GameView: View {
+        @ObservedObject var viewModel: HangmanViewModel
+        var body: some View {
+            VStack {
+                Group {
+                    Spacer()
+                    Text("Hangman")
+                        .font(.largeTitle)
+                    Spacer()
+                }
+
+                Text(viewModel.displayableAnswer)
+                    .font(.system(size: 40, weight: .heavy).monospaced())
+                    .foregroundColor(.indigo)
+                Spacer()
+                HStack(spacing: 20) {
+                    VStack {
+                        Text("\(viewModel.guessesRemaining)")
+                        Text("incorrect")
+                        Text("guesses")
+                        if viewModel.guessesRemaining == HangmanGame.INCORRECT_GUESSES_ALLOWED {
+                            Text("allowed")
+                        } else {
+                            Text("remaining")
+                        }
+                    }
+
+                    Gallows(guessesRemaining: viewModel.guessesRemaining)
+                        .stroke(.red, lineWidth: 3)
+                        .frame(width: 80, height: 150)
+                }
+
+                Spacer()
+                AvailableLettersView(viewModel: viewModel)
+                Spacer()
+
+                Spacer()
+            }
+        }
     }
 
     struct AvailableLettersView: View {
         @ObservedObject var viewModel: HangmanViewModel
-        let updateShowingAlert: (Bool) -> Void
+//        let updateShowingAlert: (Bool) -> Void
 
         let rows: [[Character]] = [
             ["a", "b", "c", "d", "e", "f", "g"],
@@ -80,7 +84,7 @@ struct HangmanView: View {
                         ForEach(row, id: \.self) { letter in
                             Button {
                                 viewModel.guessLetter(letter)
-                                updateShowingAlert(viewModel.status != .playing)
+//                                updateShowingAlert(viewModel.status != .playing)
                             } label: {
                                 Image(systemName: "\(letter).square")
                                     .font(.system(size: 35))
@@ -92,6 +96,41 @@ struct HangmanView: View {
             }
             .padding()
             .disabled(viewModel.status != .playing)
+        }
+    }
+
+    struct WonView: View {
+        @ObservedObject var viewModel: HangmanViewModel
+        var body: some View {
+            VStack {
+                Spacer()
+                Text("You Won!")
+                    .foregroundColor(.red)
+                    .font(.system(size: 30, weight: .heavy))
+                Spacer()
+                Button("OK") { viewModel.startNewGame() }
+                Spacer()
+            }
+            .frame(width: 300, height: 200)
+            .background(Color(red: 0.267, green: 0.855, blue: 0.741))
+        }
+    }
+    
+    struct LostView: View {
+        @ObservedObject var viewModel: HangmanViewModel
+        var body: some View {
+            VStack {
+                Spacer()
+                Text("You Lost!")
+                    .foregroundColor(.red)
+                    .font(.system(size: 30, weight: .heavy))
+                Text("The word was \"\(viewModel.word)\"")
+                Spacer()
+                Button("OK") { viewModel.startNewGame() }
+                Spacer()
+            }
+            .frame(width: 300, height: 200)
+            .background(Color(red: 0.267, green: 0.855, blue: 0.741))
         }
     }
 
