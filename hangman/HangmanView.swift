@@ -7,6 +7,14 @@
 
 import SwiftUI
 
+let backgroundColor = Color(red: 255/255, green: 209/255, blue: 102/255)
+let gallowsColor = Color(red: 239/255, green: 71/255, blue: 111/255)
+let textColor = Color(red: 7/255, green: 59/255, blue: 76/255)
+let popupBackgroundColor = Color(red: 6/255, green: 214/255, blue: 160/255)
+let popupBorderColor = Color(red: 17/255, green: 138/255, blue: 178/255)
+let popupTextColor = gallowsColor
+let keyboardColor = textColor
+
 struct HangmanView: View {
     @StateObject var viewModel = HangmanViewModel()
 
@@ -21,7 +29,7 @@ struct HangmanView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .background(Color(hue: 0.534, saturation: 1.0, brightness: 1.0, opacity: 0.17))
+        .background(backgroundColor)
         .ignoresSafeArea()
     }
 
@@ -38,7 +46,7 @@ struct HangmanView: View {
 
                 Text(viewModel.displayableAnswer)
                     .font(.system(size: 40, weight: .heavy).monospaced())
-                    .foregroundColor(.indigo)
+                    .foregroundColor(textColor)
                 Spacer()
                 HStack(spacing: 20) {
                     VStack {
@@ -53,7 +61,7 @@ struct HangmanView: View {
                     }
 
                     Gallows(guessesRemaining: viewModel.guessesRemaining)
-                        .stroke(.red, lineWidth: 3)
+                        .stroke(gallowsColor, lineWidth: 3)
                         .frame(width: 80, height: 150)
                 }
 
@@ -68,7 +76,6 @@ struct HangmanView: View {
 
     struct AvailableLettersView: View {
         @ObservedObject var viewModel: HangmanViewModel
-//        let updateShowingAlert: (Bool) -> Void
 
         let rows: [[Character]] = [
             ["a", "b", "c", "d", "e", "f", "g"],
@@ -84,7 +91,7 @@ struct HangmanView: View {
                         ForEach(row, id: \.self) { letter in
                             Button {
                                 viewModel.guessLetter(letter)
-//                                updateShowingAlert(viewModel.status != .playing)
+
                             } label: {
                                 Image(systemName: "\(letter).square")
                                     .font(.system(size: 35))
@@ -95,29 +102,52 @@ struct HangmanView: View {
                 }
             }
             .padding()
+//            .foregroundColor(keyboardColor)
             .disabled(viewModel.status != .playing)
         }
     }
 
     struct WonView: View {
         @ObservedObject var viewModel: HangmanViewModel
+        @State var fontSize = 10.0
+
+        let cornerRadius = 30.0
         var body: some View {
             VStack {
                 Spacer()
                 Text("You Won!")
-                    .foregroundColor(.red)
-                    .font(.system(size: 30, weight: .heavy))
+                    .foregroundColor(popupTextColor)
+                    .font(.system(size: fontSize, weight: .heavy))
                 Spacer()
                 Button("OK") { viewModel.startNewGame() }
                 Spacer()
             }
-            .frame(width: 300, height: 200)
-            .background(Color(red: 0.267, green: 0.855, blue: 0.741))
+            .frame(width: 300, height: 150)
+            .foregroundColor(popupBorderColor)
+            .background(
+                RoundedRectangle(
+                    cornerRadius: cornerRadius)
+                    .fill(popupBackgroundColor))
+            .overlay(
+                RoundedRectangle(
+                    cornerRadius: cornerRadius)
+                    .stroke(popupBorderColor, lineWidth: 5)
+            )
+            .onAppear {
+                withAnimation(.spring(
+                    response: 0.8,
+                    dampingFraction: 0.2,
+                    blendDuration: 5)
+                ) {
+                    fontSize = 30
+                }
+            }
         }
     }
-    
+
     struct LostView: View {
         @ObservedObject var viewModel: HangmanViewModel
+        let cornerRadius = 30.0
         var body: some View {
             VStack {
                 Spacer()
@@ -130,7 +160,16 @@ struct HangmanView: View {
                 Spacer()
             }
             .frame(width: 300, height: 200)
-            .background(Color(red: 0.267, green: 0.855, blue: 0.741))
+            .foregroundColor(popupBorderColor)
+            .background(
+                RoundedRectangle(
+                    cornerRadius: cornerRadius)
+                    .fill(popupBackgroundColor))
+            .overlay(
+                RoundedRectangle(
+                    cornerRadius: cornerRadius)
+                    .stroke(popupBorderColor, lineWidth: 5)
+            )
         }
     }
 
