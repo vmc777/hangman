@@ -14,6 +14,7 @@ struct HangmanWords {
         if let fileURL = Bundle.main.url(forResource: "common-7-letter-words", withExtension: "txt") {
             if let fileContents = try? String(contentsOf: fileURL) {
                 words = fileContents.components(separatedBy: "\n")
+                words.removeAll(where: {$0.count != 7})
             }
         }
     }

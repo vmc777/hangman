@@ -20,6 +20,11 @@
 		066BBBCA28E8645700D017F3 /* GetWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066BBBC928E8645700D017F3 /* GetWord.swift */; };
 		06BD61062900319000C2E559 /* hangmanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BD61052900319000C2E559 /* hangmanViewModel.swift */; };
 		06BD610829003B5600C2E559 /* HangmanViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BD610729003B5600C2E559 /* HangmanViewModelTests.swift */; };
+		06C9928E2912B17E007321E2 /* AvailableLettersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C9928D2912B17E007321E2 /* AvailableLettersView.swift */; };
+		06C992902912B8DF007321E2 /* WonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C9928F2912B8DF007321E2 /* WonView.swift */; };
+		06C992922912B90F007321E2 /* LostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C992912912B90F007321E2 /* LostView.swift */; };
+		06C992942912BA39007321E2 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C992932912BA39007321E2 /* GameView.swift */; };
+		06C992962912BAD8007321E2 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06C992952912BAD8007321E2 /* Theme.swift */; };
 		06F521032905D83F002B3008 /* common-7-letter-words.txt in Resources */ = {isa = PBXBuildFile; fileRef = 06F521022905D83F002B3008 /* common-7-letter-words.txt */; };
 		06F6020828F1BF0100F35D56 /* Gallows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06F6020728F1BF0100F35D56 /* Gallows.swift */; };
 /* End PBXBuildFile section */
@@ -57,6 +62,11 @@
 		066BBBC928E8645700D017F3 /* GetWord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWord.swift; sourceTree = "<group>"; };
 		06BD61052900319000C2E559 /* hangmanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hangmanViewModel.swift; sourceTree = "<group>"; };
 		06BD610729003B5600C2E559 /* HangmanViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangmanViewModelTests.swift; sourceTree = "<group>"; };
+		06C9928D2912B17E007321E2 /* AvailableLettersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableLettersView.swift; sourceTree = "<group>"; };
+		06C9928F2912B8DF007321E2 /* WonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WonView.swift; sourceTree = "<group>"; };
+		06C992912912B90F007321E2 /* LostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostView.swift; sourceTree = "<group>"; };
+		06C992932912BA39007321E2 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		06C992952912BAD8007321E2 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		06F521022905D83F002B3008 /* common-7-letter-words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "common-7-letter-words.txt"; sourceTree = "<group>"; };
 		06F6020728F1BF0100F35D56 /* Gallows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallows.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +121,11 @@
 			children = (
 				060559CE28DB6DE200CB1EA4 /* hangmanApp.swift */,
 				060559D028DB6DE200CB1EA4 /* HangmanView.swift */,
+				06C992952912BAD8007321E2 /* Theme.swift */,
+				06C992932912BA39007321E2 /* GameView.swift */,
+				06C992912912B90F007321E2 /* LostView.swift */,
+				06C9928F2912B8DF007321E2 /* WonView.swift */,
+				06C9928D2912B17E007321E2 /* AvailableLettersView.swift */,
 				06F6020728F1BF0100F35D56 /* Gallows.swift */,
 				06F521022905D83F002B3008 /* common-7-letter-words.txt */,
 				066BBBC928E8645700D017F3 /* GetWord.swift */,
@@ -280,11 +295,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06C992922912B90F007321E2 /* LostView.swift in Sources */,
 				060E1411290095F90075024A /* HangmanWords.swift in Sources */,
 				060559D128DB6DE200CB1EA4 /* HangmanView.swift in Sources */,
 				060559F928DB6E1600CB1EA4 /* HangmanGame.swift in Sources */,
 				060559CF28DB6DE200CB1EA4 /* hangmanApp.swift in Sources */,
+				06C992942912BA39007321E2 /* GameView.swift in Sources */,
+				06C9928E2912B17E007321E2 /* AvailableLettersView.swift in Sources */,
+				06C992902912B8DF007321E2 /* WonView.swift in Sources */,
 				066BBBCA28E8645700D017F3 /* GetWord.swift in Sources */,
+				06C992962912BAD8007321E2 /* Theme.swift in Sources */,
 				06F6020828F1BF0100F35D56 /* Gallows.swift in Sources */,
 				06BD61062900319000C2E559 /* hangmanViewModel.swift in Sources */,
 			);

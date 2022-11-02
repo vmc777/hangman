@@ -44,6 +44,7 @@ struct HangmanGame {
 
     init(word: String) throws {
         if word.count != HangmanGame.LETTER_COUNT {
+            print("Creating Hangman game using word: \"\(word)\"")
             throw HangmanError.invalidLength
         }
         self.word = word
